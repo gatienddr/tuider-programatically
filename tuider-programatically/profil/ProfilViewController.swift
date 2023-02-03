@@ -27,8 +27,42 @@ final class ProfilViewController: UIViewController {
     }
 
     // MARK: Private method
-    private func setUpView() {
+    fileprivate func setUpConstraint(
+        _ cardView: UIView,
+        _ completeProfileLabel: UILabel,
+        _ backgroundImageColor: UIImageView
+    ) {
+        NSLayoutConstraint.activate([
+            cardView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            cardView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            cardView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
 
+            cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+
+            imageViewArea.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
+            imageViewArea.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 50),
+            imageViewArea.heightAnchor.constraint(equalToConstant: widthImageViewArea ),
+            imageViewArea.widthAnchor.constraint(equalToConstant: widthImageViewArea),
+
+            imageView.heightAnchor.constraint(equalToConstant: widthImageViewArea),
+            imageView.widthAnchor.constraint(equalToConstant: widthImageViewArea),
+
+            completeProfileView.centerXAnchor.constraint(equalTo: imageViewArea.centerXAnchor),
+            completeProfileView.topAnchor.constraint(equalTo: imageViewArea.bottomAnchor, constant: -5),
+            completeProfileView.widthAnchor.constraint(equalToConstant: widthImageViewArea),
+            completeProfileView.heightAnchor.constraint(equalToConstant: 30),
+
+            completeProfileLabel.centerXAnchor.constraint(equalTo: completeProfileView.centerXAnchor),
+            completeProfileLabel.centerYAnchor.constraint(equalTo: completeProfileView.centerYAnchor),
+
+            backgroundImageColor.centerXAnchor.constraint(equalTo: self.completeProfileView.centerXAnchor),
+            backgroundImageColor.centerYAnchor.constraint(equalTo: self.completeProfileView.centerYAnchor)
+        ])
+    }
+
+    private func setUpView() {
         self.imageViewArea.translatesAutoresizingMaskIntoConstraints = false
         self.imageViewArea.backgroundColor = .red
         self.imageViewArea.layer.cornerRadius = self.widthImageViewArea / 2
@@ -63,15 +97,15 @@ final class ProfilViewController: UIViewController {
 
         // circle around pic
 
-        let xPosCircle = UIScreen.main.bounds.width / 2
-        let yPosCircle: Double = 100
+        let xPosCircle: Double = 191
+        let yPosCircle: Double = 154
 
         let circlePath = UIBezierPath(
             arcCenter: CGPoint(
                 x: xPosCircle,
                 y: yPosCircle
             ),
-            radius: 100,
+            radius: 107,
             startAngle: 0,
             endAngle: 10,
             clockwise: true
@@ -82,7 +116,7 @@ final class ProfilViewController: UIViewController {
 
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = UIColor.red.cgColor
-        shapeLayer.lineWidth = 3.0
+        shapeLayer.lineWidth = 5.0
 
         cardView.layer.addSublayer(shapeLayer)
 
@@ -92,35 +126,7 @@ final class ProfilViewController: UIViewController {
 
         self.imageViewArea.addSubview(self.imageView)
 
-        NSLayoutConstraint.activate([
-            cardView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            cardView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            cardView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-
-            cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-
-            imageViewArea.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
-            imageViewArea.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 50),
-            imageViewArea.heightAnchor.constraint(equalToConstant: self.widthImageViewArea ),
-            imageViewArea.widthAnchor.constraint(equalToConstant: self.widthImageViewArea),
-
-            imageView.heightAnchor.constraint(equalToConstant: self.widthImageViewArea),
-            imageView.widthAnchor.constraint(equalToConstant: self.widthImageViewArea),
-
-            self.completeProfileView.centerXAnchor.constraint(equalTo: self.imageViewArea.centerXAnchor),
-            self.completeProfileView.topAnchor.constraint(equalTo: self.imageViewArea.bottomAnchor, constant: -30),
-            completeProfileView.widthAnchor.constraint(equalToConstant: self.widthImageViewArea),
-            completeProfileView.heightAnchor.constraint(equalToConstant: 30),
-
-            completeProfileLabel.centerXAnchor.constraint(equalTo: completeProfileView.centerXAnchor),
-            completeProfileLabel.centerYAnchor.constraint(equalTo: completeProfileView.centerYAnchor),
-
-            backgroundImageColor.centerXAnchor.constraint(equalTo: self.completeProfileView.centerXAnchor),
-            backgroundImageColor.centerYAnchor.constraint(equalTo: self.completeProfileView.centerYAnchor),
-
-        ])
+        setUpConstraint(cardView, completeProfileLabel, backgroundImageColor)
     }
 
 }

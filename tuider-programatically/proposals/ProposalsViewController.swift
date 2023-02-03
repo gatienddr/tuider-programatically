@@ -81,8 +81,6 @@ class ProposalsViewController: UIViewController, Swipeable {
 
         view.bringSubviewToFront(hearthView)
         view.bringSubviewToFront(nonView)
-
-
     }
 
     func setUpView() {
